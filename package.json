@@ -31,13 +31,13 @@
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.25",
     "next": "16.0.6",
-    "openai": "^6.9.1",
+    "openai": "^4.104.0",
     "openai-edge": "^1.2.2",
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-hook-form": "^7.67.0",
     "tailwind-merge": "^3.4.0",
-    "zod": "^4.1.13",
+    "zod": "^3.25.76",
     "zustand": "^5.0.9"
   },
   "devDependencies": {

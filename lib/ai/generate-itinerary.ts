@@ -19,6 +19,7 @@ export interface UserRequirements {
   travelStyle?: string; // 'luxury', 'mid-range', 'budget', 'backpacking'
   pace?: string; // 'relaxed', 'moderate', 'packed'
   specialRequirements?: string[];
+  [key: string]: unknown; // Index signature for compatibility
 }
 
 export interface GeneratedItinerary {
