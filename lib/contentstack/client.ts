@@ -1,6 +1,7 @@
 /**
  * Contentstack Client Setup
  * Initializes Content Delivery API (CDA) and Content Management API (CMA) clients
+ * With Personalize/Entry Variants support
  */
 
 import Contentstack from 'contentstack';
@@ -25,6 +26,14 @@ export const getManagementClient = () => {
     authtoken: process.env.CONTENTSTACK_MANAGEMENT_TOKEN!,
   });
 };
+
+// Personalize configuration
+export const getPersonalizeConfig = () => ({
+  projectUid: process.env.PERSONALIZE_PROJECT_UID || '',
+  edgeApiUrl: process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'eu' 
+    ? 'https://eu-personalize-edge.contentstack.com'
+    : 'https://personalize-edge.contentstack.com',
+});
 
 // Helper function to validate Contentstack configuration
 export const validateContentstackConfig = () => {
@@ -53,5 +62,5 @@ if (process.env.NODE_ENV === 'development') {
   console.log('   Environment:', process.env.NEXT_PUBLIC_CONTENTSTACK_ENV);
   console.log('   API Key:', process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY ? 'Set' : 'Missing');
   console.log('   Delivery Token:', process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN ? 'Set' : 'Missing');
+  console.log('   Personalize Project:', process.env.PERSONALIZE_PROJECT_UID ? 'Set' : 'Not configured');
 }
-

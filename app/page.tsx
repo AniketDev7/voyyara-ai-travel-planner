@@ -5,17 +5,21 @@ import { FeaturedDestinations } from "@/components/home/FeaturedDestinations";
 import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { Testimonials } from "@/components/home/Testimonials";
 import { FinalCTA } from "@/components/home/FinalCTA";
+import { GlobalFloatingImages } from "@/components/shared/GlobalFloatingImages";
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
-      <HowItWorks />
-      <WhyVoyyara />
-      <FeaturedDestinations />
-      <WhyChooseUs />
-      <Testimonials />
-      <FinalCTA />
+      <GlobalFloatingImages />
+      <div className="relative z-10">
+        <HeroSection />
+        <HowItWorks />
+        <WhyVoyyara />
+        <FeaturedDestinations />
+        <WhyChooseUs />
+        <Testimonials />
+        <FinalCTA />
+      </div>
     </>
   );
 }

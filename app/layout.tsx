@@ -26,11 +26,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} font-sans`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${poppins.variable} font-sans`} suppressHydrationWarning>
         <Header />
-        <main className="pt-16 min-h-screen">
-          {children}
+        <main className="pt-16 min-h-screen overflow-x-hidden">
+        {children}
         </main>
         <Footer />
       </body>

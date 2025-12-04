@@ -142,6 +142,18 @@ npm run lint         # Run ESLint
 npm run setup        # Create Contentstack content types
 ```
 
+## 📚 Documentation
+
+### Contentstack Integration
+For detailed information about our CMS integration, see [CONTENTSTACK_INTEGRATION.md](./CONTENTSTACK_INTEGRATION.md)
+
+This document covers:
+- Content types and schemas
+- API integration patterns
+- Data flow architecture
+- Asset management
+- Best practices
+
 ## Key Features Implementation
 
 ### AI Chat with Streaming

@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { LocalizationSwitcher } from './LocalizationSwitcher';
 
 export function Header() {
   return (
@@ -42,8 +43,11 @@ export function Header() {
             </Link>
           </nav>
 
-          {/* CTA */}
+          {/* CTA + Localization */}
           <div className="flex items-center space-x-4">
+            {/* Currency/Language Switcher */}
+            <LocalizationSwitcher compact />
+            
             <Button variant="ghost" className="hidden sm:inline-flex text-gray-700 hover:text-gray-900 hover:bg-gray-100">
               Sign In
             </Button>

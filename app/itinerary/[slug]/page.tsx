@@ -1,64 +1,104 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+
+interface PersonalizationInfo {
+  currency: string;
+  language: string;
+  variantApplied: boolean;
+  variantUid: string | null;
+  variantName: string | null;
+}
 
 export default function ItineraryDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = use(params);
   const [itinerary, setItinerary] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [showAllDays, setShowAllDays] = useState(false);
+  const [currentCurrency, setCurrentCurrency] = useState('USD');
+  const [personalization, setPersonalization] = useState<PersonalizationInfo | null>(null);
 
-  useEffect(() => {
-    async function fetchItinerary() {
-      try {
-        // Fetch from Contentstack
-        const response = await fetch(`/api/itinerary/${resolvedParams.slug}`);
-        const data = await response.json();
-        
-        if (data.success && data.itinerary) {
-          // Transform Contentstack data to component format
-          const cms = data.itinerary;
-          const transformed = {
-            destination: cms.destination?.[0]?.title || cms.destination || 'Destination',
-            type: cms.type,
-            name: cms.title,
-            duration: cms.duration,
-            heroImage: cms.hero_image_url || cms.hero_image?.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920',
-            description: cms.short_description,
-            longDescription: cms.long_description,
-            price: cms.price,
-            included: cms.included_items || [],
-            highlights: cms.highlights || [],
-            dayByDay: cms.day_by_day?.map((day: any) => ({
-              day: `Day ${day.day_number}`,
-              title: day.day_title,
-              image: day.day_image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600',
-              activities: day.activities?.map((act: any) => ({
-                time: act.time,
-                title: act.activity_title,
-                description: act.activity_description,
-              })) || [],
-            })) || [],
-          };
-          setItinerary(transformed);
-        } else {
-          // Fallback to mock data only if fetch fails
-          setItinerary(getMockItinerary(resolvedParams.slug));
+  const fetchItinerary = useCallback(async (currency: string) => {
+    try {
+      // Fetch from Contentstack with currency preference
+      const language = localStorage.getItem('voyyara_language') || 'en';
+      const response = await fetch(`/api/itinerary/${resolvedParams.slug}?currency=${currency}&language=${language}`);
+      const data = await response.json();
+      
+      if (data.success && data.itinerary) {
+        // Store personalization info
+        if (data.personalization) {
+          setPersonalization(data.personalization);
         }
-      } catch (error) {
-        console.error('Error fetching itinerary:', error);
+        
+        // Transform Contentstack data to component format
+        const cms = data.itinerary;
+        const transformed = {
+          destination: cms.destination?.[0]?.title || cms.destination || 'Destination',
+          type: cms.type,
+          name: cms.title,
+          duration: cms.duration,
+          heroImage: cms.hero_image_url || cms.hero_image?.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920',
+          description: cms.short_description,
+          longDescription: cms.long_description,
+          price: cms.price,
+          included: cms.included_items || [],
+          highlights: cms.highlights || [],
+          dayByDay: cms.day_by_day?.map((day: any) => ({
+            day: `Day ${day.day_number}`,
+            title: day.day_title,
+            image: day.day_image_url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600',
+            activities: day.activities?.map((act: any) => ({
+              time: act.time,
+              title: act.activity_title,
+              description: act.activity_description,
+            })) || [],
+          })) || [],
+        };
+        setItinerary(transformed);
+      } else {
+        // Fallback to mock data only if fetch fails
         setItinerary(getMockItinerary(resolvedParams.slug));
       }
-      
-      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching itinerary:', error);
+      setItinerary(getMockItinerary(resolvedParams.slug));
     }
     
-    fetchItinerary();
+    setLoading(false);
   }, [resolvedParams.slug]);
+
+  useEffect(() => {
+    // Get initial currency from localStorage
+    const savedCurrency = localStorage.getItem('voyyara_currency') || 'USD';
+    setCurrentCurrency(savedCurrency);
+    fetchItinerary(savedCurrency);
+    
+    // Listen for currency changes from LocalizationSwitcher
+    const handleCurrencyChange = (event: CustomEvent) => {
+      const newCurrency = event.detail?.code || 'USD';
+      setCurrentCurrency(newCurrency);
+      fetchItinerary(newCurrency);
+    };
+    
+    // Listen for language changes
+    const handleLanguageChange = (event: CustomEvent) => {
+      const savedCurrency = localStorage.getItem('voyyara_currency') || 'USD';
+      fetchItinerary(savedCurrency);
+    };
+    
+    window.addEventListener('currencyChange', handleCurrencyChange as EventListener);
+    window.addEventListener('languageChange', handleLanguageChange as EventListener);
+    
+    return () => {
+      window.removeEventListener('currencyChange', handleCurrencyChange as EventListener);
+      window.removeEventListener('languageChange', handleLanguageChange as EventListener);
+    };
+  }, [fetchItinerary]);
 
   // Minimal fallback for error cases only - all real data should come from Contentstack CMS
   function getMockItinerary(slug: string) {
@@ -126,6 +166,14 @@ export default function ItineraryDetailPage({ params }: { params: Promise<{ slug
                 <div className="text-sm text-white/70">Starting from</div>
                 <div className="text-4xl font-bold text-white">{itinerary.price}</div>
                 <div className="text-sm text-white/70">per person</div>
+                {/* Personalization indicator */}
+                {personalization?.variantApplied && (
+                  <div className="mt-2 flex items-center gap-2">
+                    <span className="px-2 py-1 bg-green-500/80 rounded-full text-xs text-white font-medium">
+                      ✨ Personalized ({personalization.variantName})
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </motion.div>
