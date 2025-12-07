@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
+import ClientProviders from "@/components/shared/ClientProviders";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -16,8 +17,8 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "AI Travel Planner - Plan Your Perfect Trip with AI",
-  description: "Get personalized travel itineraries in seconds with our AI-powered travel planner. Create detailed, day-by-day plans tailored to your preferences.",
+  title: "Voyyara - AI Travel Planner | Plan Your Perfect Trip",
+  description: "Get personalized travel itineraries in seconds with Voyyara's AI-powered travel planner. Create detailed, day-by-day plans tailored to your preferences.",
 };
 
 export default function RootLayout({
@@ -30,9 +31,10 @@ export default function RootLayout({
       <body className={`${inter.variable} ${poppins.variable} font-sans`} suppressHydrationWarning>
         <Header />
         <main className="pt-16 min-h-screen overflow-x-hidden">
-        {children}
+          {children}
         </main>
         <Footer />
+        <ClientProviders />
       </body>
     </html>
   );

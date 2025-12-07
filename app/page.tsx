@@ -6,19 +6,23 @@ import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { Testimonials } from "@/components/home/Testimonials";
 import { FinalCTA } from "@/components/home/FinalCTA";
 import { GlobalFloatingImages } from "@/components/shared/GlobalFloatingImages";
+import { getHomepageContent } from "@/lib/contentstack/homepage";
 
-export default function Home() {
+export default async function Home() {
+  // Fetch homepage content from CMS
+  const cmsContent = await getHomepageContent();
+
   return (
     <>
       <GlobalFloatingImages />
       <div className="relative z-10">
-        <HeroSection />
-        <HowItWorks />
-        <WhyVoyyara />
+        <HeroSection content={cmsContent?.hero} />
+        <HowItWorks content={cmsContent?.how_it_works} />
+        <WhyVoyyara content={cmsContent?.why_voyyara} />
         <FeaturedDestinations />
-        <WhyChooseUs />
-        <Testimonials />
-        <FinalCTA />
+        <WhyChooseUs content={cmsContent?.why_choose_us} />
+        <Testimonials content={cmsContent?.testimonials} />
+        <FinalCTA content={cmsContent?.final_cta} />
       </div>
     </>
   );

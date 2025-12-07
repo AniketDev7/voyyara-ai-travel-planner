@@ -8,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { setPersonalizeAttribute } from '@/lib/personalize/tracking';
 
 export interface Currency {
   code: string;
@@ -88,10 +87,7 @@ export function LocalizationSwitcher({
     localStorage.setItem('voyyara_currency', currency.code);
     localStorage.setItem('voyyara_currency_symbol', currency.symbol);
     
-    // Set Personalize attribute for audience matching
-    setPersonalizeAttribute('user_currency', currency.code);
-    
-    // Trigger global event for other components to listen
+    // Trigger global event for real-time currency conversion
     window.dispatchEvent(new CustomEvent('currencyChange', { detail: currency }));
     
     onCurrencyChange?.(currency);
@@ -101,10 +97,7 @@ export function LocalizationSwitcher({
     setSelectedLanguage(language);
     localStorage.setItem('voyyara_language', language.code);
     
-    // Set Personalize attribute for audience matching
-    setPersonalizeAttribute('user_language', language.code);
-    
-    // Trigger global event for other components to listen
+    // Trigger global event for language changes
     window.dispatchEvent(new CustomEvent('languageChange', { detail: language }));
     
     onLanguageChange?.(language);
