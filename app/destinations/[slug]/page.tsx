@@ -83,16 +83,35 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
         slug: `${title.toLowerCase().replace(/\s+/g, '-')}-contact-us`,
         title: 'Itineraries Coming Soon',
         type: 'custom',
-        duration: 'Custom',
+        duration: { days: 7, nights: 6, display_text: '7 Days / 6 Nights' },
         short_description: 'Our travel experts are preparing amazing itineraries for this destination.',
         thumbnail_image: { url: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800' },
         highlights: [
           { title: 'Contact us for details' },
           { title: 'Custom planning available' },
         ],
-        price: 'Contact for pricing',
+        pricing: { display_price: 'Contact for pricing' },
       },
     ];
+  }
+
+  // Helper to format duration from V2 format
+  function formatDuration(duration: any): string {
+    if (!duration) return '7 Days';
+    if (typeof duration === 'string') return duration;
+    if (duration.display_text) return duration.display_text;
+    if (duration.nights && duration.days) return `${duration.nights} Nights / ${duration.days} Days`;
+    if (duration.days) return `${duration.days} Days`;
+    return '7 Days';
+  }
+
+  // Helper to get price from V2 format
+  function getPrice(itinerary: any): string {
+    if (itinerary.pricing?.display_price) return itinerary.pricing.display_price;
+    if (itinerary.pricing?.price_display) return itinerary.pricing.price_display;
+    if (itinerary.pricing?.base_price) return `From $${itinerary.pricing.base_price}`;
+    if (itinerary.price) return itinerary.price;
+    return 'Contact for price';
   }
 
   if (loading) {
@@ -121,10 +140,10 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
     <div className="min-h-screen">
       {/* Hero Section */}
       <section className="relative h-[70vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
+        {/* Background Image - from CMS featured_image */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${destination?.hero_image || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920'})` }}
+          style={{ backgroundImage: `url(${destination?.featured_image?.url || destination?.hero_image || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920'})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
@@ -168,8 +187,8 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
               {[
-                { icon: '📅', title: 'Best Time', value: destination.best_time || 'Year-round' },
-                { icon: '⏱️', title: 'Duration', value: destination.duration || '7-14 days' },
+                { icon: '📅', title: 'Best Time', value: destination.best_time_to_visit || destination.best_time || 'Year-round' },
+                { icon: '⏱️', title: 'Recommended', value: '7-14 days' },
                 { icon: '💰', title: 'Currency', value: destination.currency || 'Local Currency' },
                 { icon: '🗣️', title: 'Language', value: destination.language || 'English' },
               ].map((info, index) => (
@@ -254,7 +273,7 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
                         style={{ backgroundImage: `url(${itinerary.thumbnail_image?.url || itinerary.hero_image?.url || 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=800'})` }}
                       />
                       <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-full font-bold text-gray-900 shadow-lg">
-                        {itinerary.duration}
+                        {formatDuration(itinerary.duration)}
                       </div>
                     </div>
 
@@ -269,7 +288,7 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
                         {itinerary.highlights?.slice(0, 3).map((highlight: any, i: number) => (
                           <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
                             <span className="text-purple-500">✓</span>
-                            <span>{highlight.title || highlight}</span>
+                            <span>{highlight.highlight_title || highlight.title || highlight}</span>
                           </div>
                         ))}
                       </div>
@@ -277,7 +296,7 @@ export default function DestinationDetailPage({ params }: { params: Promise<{ sl
                       {/* Price */}
                       <div className="pt-4 border-t border-gray-200">
                         <div className="flex items-center justify-between">
-                          <span className="text-lg font-bold text-purple-600">{itinerary.price}</span>
+                          <span className="text-lg font-bold text-purple-600">{getPrice(itinerary)}</span>
                           <span className="text-sm text-gray-500">per person</span>
                         </div>
                       </div>

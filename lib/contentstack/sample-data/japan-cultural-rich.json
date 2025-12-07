@@ -1,0 +1,940 @@
+{
+  "title": "Cultural Discovery Japan",
+  "slug": "japan-cultural",
+  "trip_type": "cultural",
+  "tagline": "Where ancient traditions meet futuristic innovation",
+  "short_description": "Immerse yourself in Japan's rich heritage - from serene temples and traditional tea ceremonies to bustling Tokyo streets and peaceful zen gardens. A journey that awakens all your senses.",
+  
+  "duration": {
+    "nights": 7,
+    "days": 8,
+    "display_text": "7 Nights / 8 Days"
+  },
+
+  "overview": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Japan is a country of beautiful contrasts - where 1000-year-old temples stand in the shadow of neon-lit skyscrapers, where bullet trains whisk you between ancient capitals, and where every meal is a work of art."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "This carefully crafted 8-day journey takes you through the heart of Japanese culture. You'll witness monks chanting at dawn in Kyoto's golden pavilions, experience the meditative calm of a traditional tea ceremony, lose yourself in Tokyo's organized chaos, and soak in natural hot springs with views of Mt. Fuji."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "What sets this itinerary apart is the ",
+            "bold": false
+          },
+          {
+            "type": "text",
+            "text": "perfect balance",
+            "bold": true
+          },
+          {
+            "type": "text",
+            "text": " between iconic must-sees and hidden local gems. We've partnered with local experts to unlock experiences you won't find in guidebooks - from sake tastings in centuries-old breweries to dinner in an intimate izakaya known only to locals."
+          }
+        ]
+      }
+    ]
+  },
+
+  "pricing": {
+    "starting_price": 2500,
+    "display_price": "From $2,500",
+    "price_per": "per person, twin sharing",
+    "budget_breakdown": [
+      {
+        "cost_item": {
+          "category": "accommodation",
+          "description": "7 nights in carefully selected hotels & ryokan",
+          "estimated_cost": "$1,000 - $1,400"
+        }
+      },
+      {
+        "cost_item": {
+          "category": "transport",
+          "description": "7-day JR Pass + local metro",
+          "estimated_cost": "$350 - $400"
+        }
+      },
+      {
+        "cost_item": {
+          "category": "activities",
+          "description": "Temple entries, experiences, tours",
+          "estimated_cost": "$300 - $400"
+        }
+      },
+      {
+        "cost_item": {
+          "category": "meals",
+          "description": "Breakfast included, lunch & dinner budget",
+          "estimated_cost": "$400 - $600"
+        }
+      }
+    ]
+  },
+
+  "highlights": [
+    {
+      "highlight": {
+        "icon": "🏛️",
+        "title": "Ancient Temples & Shrines",
+        "description": "Explore UNESCO World Heritage sites including Kinkaku-ji, Senso-ji, and the mystical Fushimi Inari with its 10,000 torii gates"
+      }
+    },
+    {
+      "highlight": {
+        "icon": "🍵",
+        "title": "Traditional Tea Ceremony",
+        "description": "Experience the meditative art of Japanese tea ceremony with a tea master in a 300-year-old tea house"
+      }
+    },
+    {
+      "highlight": {
+        "icon": "🗻",
+        "title": "Mt. Fuji Views",
+        "description": "Wake up to breathtaking views of Japan's iconic mountain from the scenic Fuji Five Lakes region"
+      }
+    },
+    {
+      "highlight": {
+        "icon": "🚄",
+        "title": "Bullet Train Experience",
+        "description": "Travel at 300km/h on the famous Shinkansen, watching the countryside blur past your window"
+      }
+    },
+    {
+      "highlight": {
+        "icon": "🍜",
+        "title": "Culinary Journey",
+        "description": "From Tsukiji market sushi to Kyoto kaiseki, experience Japan's incredible food culture"
+      }
+    },
+    {
+      "highlight": {
+        "icon": "♨️",
+        "title": "Onsen Experience",
+        "description": "Soak in natural hot springs in a traditional Japanese ryokan"
+      }
+    }
+  ],
+
+  "hidden_gems": [
+    {
+      "hidden_gem": {
+        "name": "Yanaka Ginza",
+        "type": "neighborhood",
+        "why_special": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "One of Tokyo's last surviving shitamachi (old town) neighborhoods. This charming area survived the WWII bombings and still retains its Edo-period atmosphere. The narrow streets are lined with family-run shops selling traditional crafts, and the friendly locals give you a glimpse of 'old Tokyo' that most tourists never see."
+                }
+              ]
+            }
+          ]
+        },
+        "best_time": "Late afternoon for the famous 'Sunset Stairs'"
+      }
+    },
+    {
+      "hidden_gem": {
+        "name": "Nishiki Market Back Alleys",
+        "type": "restaurant",
+        "why_special": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "While tourists crowd the main Nishiki Market, locals slip into the tiny alleys behind for the real gems. Here you'll find family-run establishments serving recipes passed down for generations - from perfect tamagoyaki (Japanese omelet) to pickles fermented in 100-year-old barrels."
+                }
+              ]
+            }
+          ]
+        },
+        "best_time": "Morning (9-11 AM) when locals shop"
+      }
+    },
+    {
+      "hidden_gem": {
+        "name": "Philosopher's Path at Dawn",
+        "type": "nature",
+        "why_special": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Everyone visits this iconic Kyoto path during the day when it's crowded. But arrive at 6 AM and you'll have this magical cherry-tree lined canal path almost entirely to yourself. Watch the morning mist rise as temple bells echo in the distance."
+                }
+              ]
+            }
+          ]
+        },
+        "best_time": "6:00 - 7:00 AM"
+      }
+    }
+  ],
+
+  "whats_included": [
+    {
+      "inclusion": {
+        "icon": "🏨",
+        "category": "accommodation",
+        "item": "7 nights accommodation",
+        "details": "5 nights in 4-star hotels, 2 nights in traditional ryokan with onsen access"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🍳",
+        "category": "meals",
+        "item": "Daily breakfast",
+        "details": "Mix of Japanese and Western options at all hotels"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🚄",
+        "category": "transport",
+        "item": "7-day JR Rail Pass",
+        "details": "Unlimited travel on JR trains including Shinkansen"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🎫",
+        "category": "activities",
+        "item": "All temple & attraction entries",
+        "details": "Pre-purchased tickets to skip the lines"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🧑‍🏫",
+        "category": "guide",
+        "item": "English-speaking local guides",
+        "details": "Licensed guides for temple tours and cultural experiences"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🍵",
+        "category": "activities",
+        "item": "Traditional tea ceremony",
+        "details": "Private session with certified tea master"
+      }
+    },
+    {
+      "inclusion": {
+        "icon": "🚐",
+        "category": "transport",
+        "item": "Airport transfers",
+        "details": "Private car from Narita/Haneda to Tokyo hotel"
+      }
+    }
+  ],
+
+  "whats_not_included": [
+    "International flights",
+    "Travel insurance (required)",
+    "Lunches and dinners (except where specified)",
+    "Personal expenses and shopping",
+    "Optional activities",
+    "Visa fees (if applicable)"
+  ],
+
+  "day_by_day": [
+    {
+      "day": {
+        "day_number": 1,
+        "day_title": "Arrival in Tokyo",
+        "day_subtitle": "From airport chaos to zen tranquility",
+        "location": "Tokyo - Shinjuku",
+        "day_overview": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Welcome to Japan! After your flight, we've designed today to be relaxed - giving you time to settle in, overcome jet lag, and gently introduce you to Tokyo's unique energy. By evening, you'll be enjoying your first authentic Japanese meal surrounded by the neon glow of Shinjuku."
+                }
+              ]
+            }
+          ]
+        },
+        "accommodation": {
+          "property_name": "Keio Plaza Hotel Tokyo",
+          "property_type": "4-Star Premium Hotel",
+          "neighborhood": "Shinjuku",
+          "why_chosen": "Perfect location right next to Shinjuku Station - Japan's busiest - with stunning city views and excellent facilities to recover from your flight."
+        },
+        "meals": {
+          "breakfast": {
+            "included": false,
+            "venue": "",
+            "what_to_try": ""
+          },
+          "lunch": {
+            "included": false,
+            "recommendation": "Ramen at Fuunji",
+            "cuisine_type": "Tsukemen (Dipping Ramen)",
+            "must_try": "Their signature thick tsukemen broth",
+            "price_range": "¥1000 (~$7)"
+          },
+          "dinner": {
+            "included": false,
+            "recommendation": "Omoide Yokocho (Memory Lane)",
+            "cuisine_type": "Izakaya - Various yakitori stalls",
+            "must_try": "Yakitori (grilled chicken skewers) and cold draft beer",
+            "price_range": "¥2000-3000 (~$15-20)",
+            "reservation_needed": false
+          }
+        },
+        "activities": [
+          {
+            "activity": {
+              "time_slot": "Afternoon",
+              "title": "Airport Arrival & Transfer",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Your private driver will be waiting at arrivals with a sign bearing your name. Sit back and enjoy the 60-90 minute drive to Shinjuku, watching as the countryside gradually transforms into the urban jungle of Tokyo. Your driver can point out landmarks along the way."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1.5-2 hours",
+              "location": "Narita/Haneda Airport → Shinjuku",
+              "entry_fee": "Included",
+              "booking_required": false,
+              "pro_tips": [
+                "Exchange some yen at the airport (rates are decent)",
+                "Pick up a pocket WiFi at the airport counter",
+                "The driver won't expect tips - it's not customary in Japan"
+              ]
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "4:00 PM",
+              "title": "Hotel Check-in & Rest",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Check into your room and take time to freshen up. We recommend a 1-2 hour rest - not full sleep, which will mess with your body clock, but enough to recharge for the evening ahead."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "2 hours",
+              "location": "Keio Plaza Hotel",
+              "pro_tips": [
+                "Don't nap longer than 2 hours - you'll adapt faster",
+                "The hotel has a convenience store in the basement for snacks"
+              ]
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "6:30 PM",
+              "title": "Shinjuku Evening Exploration",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "As the sun sets, Shinjuku transforms into a symphony of neon. Take a self-guided walk through this electric neighborhood:"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "bullet_list",
+                    "content": [
+                      {
+                        "type": "list_item",
+                        "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Start at Shinjuku Station's south exit" }] }]
+                      },
+                      {
+                        "type": "list_item",
+                        "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Walk through the neon-lit Kabukicho entertainment district (safe to walk through!)" }] }]
+                      },
+                      {
+                        "type": "list_item",
+                        "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Find the famous Godzilla head atop the Toho Cinema building" }] }]
+                      },
+                      {
+                        "type": "list_item",
+                        "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "End at Omoide Yokocho for dinner" }] }]
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "2-3 hours",
+              "location": "Shinjuku",
+              "entry_fee": "Free",
+              "pro_tips": [
+                "The neon lights are best after 7 PM",
+                "Don't be shy to photograph - everyone does!",
+                "Kabukicho is safe but avoid touts offering 'free drinks'"
+              ]
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "8:00 PM",
+              "title": "Dinner at Omoide Yokocho",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Step back in time at 'Memory Lane' (also affectionately called 'Piss Alley' by locals - don't worry, it's charming!). These narrow alleys house tiny yakitori stalls unchanged since the post-war era. Squeeze into a counter seat, order cold beer and point at whatever looks good on the grill. This is authentic Tokyo at its finest."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1-1.5 hours",
+              "location": "Omoide Yokocho, Shinjuku",
+              "pro_tips": [
+                "Most stalls seat only 6-10 people - wait for a spot",
+                "Try 'negima' (chicken and leek) and 'tsukune' (chicken meatball)",
+                "Cash only at most stalls",
+                "It's okay to eat at multiple stalls - that's the local way!"
+              ],
+              "activity_type": "food"
+            }
+          }
+        ],
+        "day_tips": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": { "level": 3 },
+              "content": [{ "type": "text", "text": "💡 Day 1 Tips" }]
+            },
+            {
+              "type": "bullet_list",
+              "content": [
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Stay awake until at least 9 PM to beat jet lag faster" }] }]
+                },
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Download Google Maps offline for Tokyo - it's essential" }] }]
+                },
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "7-Eleven ATMs accept foreign cards and are everywhere" }] }]
+                }
+              ]
+            }
+          ]
+        },
+        "getting_around": "Today is all within walking distance of your hotel. The hotel concierge can provide a map."
+      }
+    },
+    {
+      "day": {
+        "day_number": 2,
+        "day_title": "Traditional Tokyo",
+        "day_subtitle": "Temples, traditions & the art of doing nothing",
+        "location": "Tokyo - Asakusa & Ueno",
+        "day_overview": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Today we explore the historic heart of Tokyo. You'll visit the city's oldest temple, wander through traditional shopping streets unchanged for centuries, and experience your first Japanese garden - a masterclass in the art of finding peace in chaos."
+                }
+              ]
+            }
+          ]
+        },
+        "accommodation": {
+          "property_name": "Keio Plaza Hotel Tokyo",
+          "property_type": "4-Star Premium Hotel",
+          "neighborhood": "Shinjuku"
+        },
+        "meals": {
+          "breakfast": {
+            "included": true,
+            "venue": "Hotel buffet - Jurin Restaurant",
+            "what_to_try": "Try the Japanese breakfast set - grilled fish, miso soup, rice, pickles"
+          },
+          "lunch": {
+            "included": false,
+            "recommendation": "Asakusa Imahan",
+            "cuisine_type": "Sukiyaki & Shabu-shabu",
+            "must_try": "Wagyu beef sukiyaki - melt-in-your-mouth goodness",
+            "price_range": "¥3000-5000 (~$22-35)"
+          },
+          "dinner": {
+            "included": false,
+            "recommendation": "Hoppy Street (Hoppy Dori)",
+            "cuisine_type": "Traditional Izakaya Street",
+            "must_try": "Hoppy (beer-like drink) and motsunabe (offal hot pot)",
+            "price_range": "¥2500 (~$18)"
+          }
+        },
+        "activities": [
+          {
+            "activity": {
+              "time_slot": "8:00 AM",
+              "title": "Senso-ji Temple at Dawn",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "We've scheduled this early intentionally - arriving before the crowds transforms your experience. Watch incense smoke curl through morning light, observe locals performing morning prayers, and have the iconic Thunder Gate (Kaminarimon) almost to yourself. This is Tokyo's oldest and most significant temple, dating back to 645 AD."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1.5 hours",
+              "location": "Senso-ji Temple, Asakusa",
+              "address": "2 Chome-3-1 Asakusa, Taito City",
+              "entry_fee": "Free",
+              "booking_required": false,
+              "pro_tips": [
+                "Draw an 'omikuji' fortune for ¥100 - if it's bad, tie it to the rack",
+                "The incense smoke is believed to heal ailments - waft it towards any aching body parts",
+                "The temple opens at 6 AM but 8 AM is the sweet spot for light and fewer crowds"
+              ],
+              "what_to_bring": ["Coins for offerings (¥5 coins are lucky)", "Camera"],
+              "activity_type": "cultural"
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "9:30 AM",
+              "title": "Nakamise Shopping Street",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "After the temple, the famous shopping street leading to it will be waking up. This 250-meter stretch has been the temple's approach road for over 400 years. Browse traditional crafts, sample street snacks, and pick up unique souvenirs you won't find anywhere else."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1 hour",
+              "location": "Nakamise-dori, Asakusa",
+              "pro_tips": [
+                "Try 'ningyo-yaki' - small cakes in shapes of temple landmarks",
+                "Don't buy the first thing you see - prices are similar throughout",
+                "The shops on side streets often have better finds"
+              ],
+              "activity_type": "shopping"
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "11:00 AM",
+              "title": "Traditional Tea Ceremony Experience",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "This is not a tourist demonstration - it's an intimate, authentic ceremony with a certified tea master in a traditional tea room. You'll learn the philosophy behind each movement, participate in the ritual, and understand why tea ceremony is considered a form of Zen practice. Our tea master, Yamamoto-sensei, has 40 years of experience and speaks English."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1.5 hours",
+              "location": "Ran Hotei Tea House, Asakusa",
+              "entry_fee": "Included",
+              "booking_required": true,
+              "pro_tips": [
+                "Wear socks (required to remove shoes)",
+                "You'll sit on tatami - let us know if you need a chair",
+                "It's okay to ask questions - Yamamoto-sensei loves sharing"
+              ],
+              "what_to_bring": ["Clean socks"],
+              "activity_type": "cultural"
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "2:00 PM",
+              "title": "Ueno Park & Tokyo National Museum",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "Escape to Tokyo's green heart. Ueno Park is where locals come to escape the city - families picnicking, elderly couples feeding the koi, students practicing instruments. The Tokyo National Museum houses the world's largest collection of Japanese art, with samurai swords, ancient ceramics, and Buddhist sculptures spanning 5,000 years."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "3 hours",
+              "location": "Ueno Park",
+              "entry_fee": "Museum: ¥1000 (~$7)",
+              "pro_tips": [
+                "The Honkan (Japanese Gallery) is the must-see building if short on time",
+                "The garden behind the museum is a hidden gem",
+                "Stop by Ueno's famous 'Ameyoko' market on the way out"
+              ],
+              "activity_type": "sightseeing"
+            }
+          },
+          {
+            "activity": {
+              "time_slot": "6:00 PM",
+              "title": "Sunset from Tokyo Skytree",
+              "description": {
+                "type": "doc",
+                "content": [
+                  {
+                    "type": "paragraph",
+                    "content": [
+                      {
+                        "type": "text",
+                        "text": "End your day 350 meters above Tokyo at the Skytree observation deck. Time your visit for sunset - watch the city transform from a sea of concrete to a galaxy of lights. On clear days, you can see Mt. Fuji in the distance, glowing pink in the sunset."
+                      }
+                    ]
+                  }
+                ]
+              },
+              "duration": "1.5 hours",
+              "location": "Tokyo Skytree",
+              "entry_fee": "¥2100 (~$15) - Included",
+              "booking_required": true,
+              "pro_tips": [
+                "Tembo Deck (350m) is enough - Tembo Galleria is pricey for little extra",
+                "The 'Skytree Cafe' has surprisingly good coffee",
+                "Weekday sunsets are less crowded than weekends"
+              ],
+              "activity_type": "sightseeing"
+            }
+          }
+        ],
+        "day_tips": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "heading",
+              "attrs": { "level": 3 },
+              "content": [{ "type": "text", "text": "💡 Day 2 Tips" }]
+            },
+            {
+              "type": "bullet_list",
+              "content": [
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Get a Suica/Pasmo card at the station - tap-and-go for all trains" }] }]
+                },
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Asakusa has many kimono rental shops if you want to dress up for photos" }] }]
+                },
+                {
+                  "type": "list_item",
+                  "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "The Sumida River boat ride from Asakusa to Odaiba is a scenic alternative to train" }] }]
+                }
+              ]
+            }
+          ]
+        },
+        "getting_around": "Use Metro: Shinjuku → Asakusa (25 min) on Toei Asakusa Line. Then walk or short metro rides."
+      }
+    }
+  ],
+
+  "neighborhoods": [
+    {
+      "neighborhood": {
+        "name": "Shibuya",
+        "vibe": "Youthful energy & fashion-forward",
+        "best_for": ["Shopping", "People watching", "Nightlife", "Photography"],
+        "description": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Home to the world's busiest pedestrian crossing and the heart of Tokyo's youth culture. The streets around Shibuya Station are a constantly evolving showcase of Japanese fashion, from high-end boutiques to vintage treasure troves."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "neighborhood": {
+        "name": "Yanaka",
+        "vibe": "Old Tokyo charm & artistic soul",
+        "best_for": ["Escaping crowds", "Traditional crafts", "Cat spotting", "Photography"],
+        "description": {
+          "type": "doc",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "One of Tokyo's few neighborhoods to survive WWII bombing, Yanaka feels like stepping back in time. Narrow streets wind past wooden houses, family-run shops sell traditional crafts, and cats lounge on temple walls. The Yanaka Cemetery is surprisingly peaceful - a green oasis beloved by joggers and philosophers alike."
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+
+  "dining_guide": [
+    {
+      "restaurant": {
+        "name": "Sushi Dai",
+        "cuisine": "Sushi",
+        "price_range": "$$",
+        "must_try": ["Omakase course", "Tamago (sweet egg)", "Uni (sea urchin)"],
+        "why_we_love": "The original Tsukiji legend now in Toyosu. Worth the 3-hour wait for some of the freshest sushi in Tokyo - each piece prepared right in front of you.",
+        "reservation_required": false,
+        "best_for": "Once-in-a-lifetime sushi experience",
+        "location": "Toyosu Fish Market"
+      }
+    },
+    {
+      "restaurant": {
+        "name": "Ichiran Shibuya",
+        "cuisine": "Tonkotsu Ramen",
+        "price_range": "$",
+        "must_try": ["Original tonkotsu ramen", "Extra chashu pork", "Kae-dama (noodle refill)"],
+        "why_we_love": "The unique solo booths let you focus entirely on your ramen. Customize every aspect - noodle firmness, broth richness, garlic level. Perfect for introverts!",
+        "reservation_required": false,
+        "best_for": "Late night solo dining",
+        "location": "Multiple locations (Shibuya recommended)"
+      }
+    }
+  ],
+
+  "seasonal_events": [
+    {
+      "event": {
+        "name": "Cherry Blossom Season",
+        "date_period": "Late March - Early April",
+        "description": "Japan transforms into a pink wonderland. Locals gather for 'hanami' (flower viewing) parties under the trees. Key spots: Ueno Park, Meguro River, Chidorigafuchi.",
+        "dont_miss": "Night illuminations along Meguro River - magical!"
+      }
+    },
+    {
+      "event": {
+        "name": "Autumn Foliage",
+        "date_period": "Mid-November - Early December",
+        "description": "The temples of Kyoto are framed by brilliant red and gold maple leaves. Less crowded than cherry blossom season but equally stunning.",
+        "dont_miss": "Tofuku-ji Temple's 'Bridge of Autumn Leaves'"
+      }
+    }
+  ],
+
+  "practical_info": {
+    "best_time": "March-May (cherry blossoms) or October-November (autumn foliage) - book 3+ months ahead for these seasons",
+    "ideal_duration": "7-10 days minimum to cover Tokyo & Kyoto properly",
+    "difficulty": "Easy - Suitable for all",
+    "best_for": ["First-time visitors", "Couples", "Solo travelers", "Families with kids"],
+    "languages": "English is limited outside tourist areas - download Google Translate with Japanese offline",
+    "currency_tips": "Japan is still 70% cash. Carry ¥10,000-20,000 daily. 7-Eleven ATMs accept foreign cards.",
+    "connectivity": "Rent a pocket WiFi at the airport (~¥900/day) or get a tourist SIM at BIC Camera"
+  },
+
+  "packing_list": [
+    {
+      "packing_category": {
+        "category": "Clothing",
+        "items": [
+          "Comfortable walking shoes (you'll walk 15-20k steps daily)",
+          "Layers - weather can change quickly",
+          "Smart casual outfit for nice dinners",
+          "Slip-on shoes (for temple visits)",
+          "Rain jacket or compact umbrella"
+        ]
+      }
+    },
+    {
+      "packing_category": {
+        "category": "Electronics",
+        "items": [
+          "Universal power adapter (Japan uses Type A, same as US)",
+          "Portable charger",
+          "Camera with good low-light capability (for temples and night scenes)"
+        ]
+      }
+    },
+    {
+      "packing_category": {
+        "category": "Documents",
+        "items": [
+          "Passport (6+ months validity)",
+          "Printed hotel confirmations",
+          "Travel insurance documents",
+          "International driving permit (if renting car)"
+        ]
+      }
+    }
+  ],
+
+  "visa_documents": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Most Western countries enjoy visa-free entry for up to 90 days. Check with your local Japanese embassy for specific requirements for your nationality."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": { "level": 3 },
+        "content": [{ "type": "text", "text": "Required Documents:" }]
+      },
+      {
+        "type": "bullet_list",
+        "content": [
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Valid passport (6+ months validity)" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Return flight ticket" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Proof of accommodation" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Visit Japan Web registration (completed 2 weeks before travel)" }] }] }
+        ]
+      }
+    ]
+  },
+
+  "health_safety": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "content": [
+          {
+            "type": "text",
+            "text": "Japan is one of the safest countries in the world. Healthcare is excellent but expensive for foreigners - travel insurance is essential."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": { "level": 3 },
+        "content": [{ "type": "text", "text": "Health Tips:" }]
+      },
+      {
+        "type": "bullet_list",
+        "content": [
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "No vaccinations required" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Tap water is safe to drink everywhere" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Pharmacies (look for 薬) are common but staff may not speak English" }] }] },
+          { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Emergency number: 119 (ambulance), 110 (police)" }] }] }
+        ]
+      }
+    ]
+  },
+
+  "booking_info": {
+    "advance_booking": "Book 2-3 months ahead for best prices. For cherry blossom season (late March), book 4-6 months ahead.",
+    "cancellation": {
+      "type": "doc",
+      "content": [
+        {
+          "type": "bullet_list",
+          "content": [
+            { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "60+ days before: Full refund" }] }] },
+            { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "30-59 days: 75% refund" }] }] },
+            { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "14-29 days: 50% refund" }] }] },
+            { "type": "list_item", "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Less than 14 days: No refund" }] }] }
+          ]
+        }
+      ]
+    },
+    "contact_email": "bookings@voyyara.com",
+    "whatsapp": "+1-XXX-XXX-XXXX"
+  },
+
+  "travel_style": "mid-range",
+  "traveler_type": "couple",
+
+  "seo": {
+    "meta_title": "Japan Cultural Discovery - 8-Day Itinerary | Voyyara",
+    "meta_description": "Experience the best of Japanese culture with our 8-day itinerary. From Tokyo's temples to Kyoto's gardens, authentic tea ceremonies, and Mt. Fuji views.",
+    "keywords": ["Japan itinerary", "Tokyo Kyoto trip", "Japanese culture tour", "Japan travel guide", "7 days Japan"]
+  }
+}
+

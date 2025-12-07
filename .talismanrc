@@ -1,0 +1,29 @@
+fileignoreconfig:
+  - filename: components/shared/PersonalizedBadge.tsx
+    checksum: 
+    ignore_detectors: []
+    allowed_patterns:
+      - key={
+  - filename: components/shared/Footer.tsx
+    checksum:
+    ignore_detectors: []
+    allowed_patterns:
+      - key={
+  - filename: components/quiz/QuizModal.tsx
+    checksum:
+    ignore_detectors: []
+    allowed_patterns:
+      - key=
+      - keydown
+      - handleEscape
+  - filename: lib/utils/render-json-rte.tsx
+    checksum:
+    ignore_detectors: []
+    allowed_patterns:
+      - key={
+  - filename: lib/contentstack/sample-data/japan-cultural-rich.json
+    checksum:
+    ignore_detectors: []
+    allowed_patterns: []
+threshold: medium
+

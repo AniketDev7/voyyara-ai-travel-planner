@@ -94,3 +94,10 @@ logs
 
 # Private scripts and internal logic
 /scripts
+
+# Contentstack backup folders
+_backup*/
+_backup_*
+
+# Log files
+/logs

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+// Design stays in code - only text content comes from CMS
 const floatTransition1 = {
   duration: 6,
   repeat: Infinity,
@@ -23,13 +24,42 @@ const floatTransition3 = {
   ease: "easeInOut" as const
 };
 
-export function HeroSection() {
+// Props interface for CMS content
+interface HeroSectionProps {
+  content?: {
+    tagline?: string;
+    title_line1?: string;
+    title_highlight?: string;
+    description?: string;
+    cta_primary_text?: string;
+    cta_primary_link?: string;
+    cta_secondary_text?: string;
+    cta_secondary_link?: string;
+  };
+}
+
+// Default content (fallback if CMS unavailable)
+const defaultContent = {
+  tagline: 'AI-POWERED TRAVEL',
+  title_line1: 'Travel differently.',
+  title_highlight: 'with AI',
+  description: 'Get personalized travel itineraries in seconds. Our AI planner creates detailed, day-by-day plans tailored to your preferences and budget.',
+  cta_primary_text: '🌏 Start Planning',
+  cta_primary_link: '/planner',
+  cta_secondary_text: '✨ Explore Destinations',
+  cta_secondary_link: '/destinations',
+};
+
+export function HeroSection({ content }: HeroSectionProps) {
+  // Merge CMS content with defaults
+  const data = { ...defaultContent, ...content };
+
   return (
     <section className="relative min-h-[88vh] md:min-h-[92vh] flex items-center justify-center overflow-hidden rounded-b-[2.5rem] bg-gradient-to-br from-pink-100 via-purple-100 to-orange-100">
-      {/* Gradient Overlay */}
+      {/* Gradient Overlay - DESIGN (stays in code) */}
       <div className="absolute inset-0 bg-gradient-to-br from-pink-200/30 via-transparent to-orange-200/30 rounded-b-[2.5rem]" />
       
-      {/* Floating Landmarks */}
+      {/* Floating Landmarks - DESIGN (stays in code) */}
       <motion.div
         className="absolute top-[8%] right-[-5vw] md:right-[4vw] w-[35%] max-w-[220px] md:top-[17%]"
         animate={{ y: [0, -25, 0] }}
@@ -94,7 +124,7 @@ export function HeroSection() {
         />
       </motion.div>
 
-      {/* Decorative Icons */}
+      {/* Decorative Icons - DESIGN (stays in code) */}
       <motion.div
         className="absolute -top-3 -left-2 sm:top-2 sm:-left-12 w-20 h-24 opacity-90"
         animate={{ rotate: [0, 10, -5, 0] }}
@@ -111,7 +141,7 @@ export function HeroSection() {
         <div className="text-7xl">🧳</div>
       </motion.div>
 
-      {/* Content */}
+      {/* Content - TEXT FROM CMS */}
       <div className="relative container mx-auto px-6 py-24 md:py-32 text-center z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -124,7 +154,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            AI-POWERED TRAVEL
+            {data.tagline}
           </motion.div>
 
           <motion.div
@@ -140,10 +170,10 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            Travel differently.
+            {data.title_line1}
             <br />
             <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
-              with AI
+              {data.title_highlight}
             </span>
           </motion.h1>
           
@@ -153,7 +183,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Get personalized travel itineraries in seconds. Our AI planner creates detailed, day-by-day plans tailored to your preferences and budget.
+            {data.description}
           </motion.p>
 
           <motion.div 
@@ -167,8 +197,8 @@ export function HeroSection() {
               asChild 
               className="text-lg px-10 py-7 bg-black text-white hover:bg-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02]"
             >
-              <Link href="/planner">
-                🌏 Start Planning
+              <Link href={data.cta_primary_link || '/planner'}>
+                {data.cta_primary_text}
               </Link>
             </Button>
             <Button 
@@ -176,15 +206,15 @@ export function HeroSection() {
               asChild 
               className="text-lg px-10 py-7 bg-black text-white hover:bg-gray-800 rounded-full shadow-xl hover:shadow-2xl transition-all hover:scale-[1.02]"
             >
-              <Link href="/destinations">
-                ✨ Explore Destinations
+              <Link href={data.cta_secondary_link || '/destinations'}>
+                {data.cta_secondary_text}
               </Link>
             </Button>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - DESIGN (stays in code) */}
       <motion.div 
         className="absolute bottom-5 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-gray-700"
         initial={{ opacity: 0, y: -10 }}
@@ -205,4 +235,3 @@ export function HeroSection() {
     </section>
   );
 }
-

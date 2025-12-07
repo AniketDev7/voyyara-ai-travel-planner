@@ -7,6 +7,18 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'images.unsplash.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'eu-images.contentstack.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.contentstack.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.contentstack.io',
+      },
     ],
   },
 };
