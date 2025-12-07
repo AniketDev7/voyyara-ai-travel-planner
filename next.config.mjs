@@ -1,6 +1,7 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Return null to let Next.js auto-generate the build ID using nanoid
+  generateBuildId: async () => null,
   images: {
     remotePatterns: [
       {
@@ -24,3 +25,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
