@@ -39,9 +39,10 @@ const QUIZ_TO_PERSONALIZE_MAP: Record<string, PersonalizeAttributeKey> = {
  * Map quiz preferences to Personalize attributes
  * Call this after quiz completion or when preferences change
  */
-export function syncPreferencesToPersonalize(preferences: Record<string, string | string[]>) {
+export function syncPreferencesToPersonalize(preferences: Record<string, string | string[] | undefined>) {
   // Map each preference to a Personalize attribute using the correct keys
   Object.entries(preferences).forEach(([key, value]) => {
+    if (value === undefined) return; // Skip undefined values
     const attrKey = QUIZ_TO_PERSONALIZE_MAP[key] || key;
     const attrValue = Array.isArray(value) ? value.join(',') : value;
     setPersonalizeAttribute(attrKey, attrValue);
@@ -72,7 +73,7 @@ export function getUserAttributesForMatching(): Record<string, string> {
  * Build audience matching criteria based on user preferences
  * This can be used for client-side filtering or API requests
  */
-export function getAudienceMatchCriteria(preferences: Record<string, string | string[]>) {
+export function getAudienceMatchCriteria(preferences: Record<string, string | string[] | undefined>) {
   const criteria: Record<string, any> = {};
   
   // Travel style - direct match
@@ -116,7 +117,7 @@ export function scoreItineraryMatch(
     type?: string;
     duration?: { days?: number } | string;
   },
-  preferences: Record<string, string | string[]>
+  preferences: Record<string, string | string[] | undefined>
 ): number {
   let score = 0;
   
@@ -173,7 +174,7 @@ export function getPersonalizedRecommendations<T extends {
   duration?: { days?: number } | string;
 }>(
   itineraries: T[],
-  preferences: Record<string, string | string[]>
+  preferences: Record<string, string | string[] | undefined>
 ): T[] {
   // Score and sort
   const scored = itineraries.map(itin => ({
