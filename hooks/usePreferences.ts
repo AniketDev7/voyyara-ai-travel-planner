@@ -8,6 +8,7 @@ export interface UserPreferences {
   interests?: string[];
   pace?: string;
   duration?: string;
+  [key: string]: string | string[] | undefined;
 }
 
 export function usePreferences() {
