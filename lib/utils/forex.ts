@@ -190,7 +190,7 @@ export async function fetchLiveRates(baseCurrency: string = 'USD'): Promise<Reco
     cachedRates = data.rates;
     cacheTimestamp = Date.now();
     
-    return cachedRates;
+    return cachedRates as Record<string, number>;
   } catch (error) {
     console.warn('[Forex] Failed to fetch live rates, using static rates:', error);
     return EXCHANGE_RATES;
