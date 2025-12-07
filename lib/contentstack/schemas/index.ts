@@ -9,8 +9,7 @@
  */
 
 export { 
-  itineraryTemplateEnhancedSchema,
-  type EnhancedItinerary 
+  itineraryTemplateEnhancedSchema
 } from './itinerary-template-enhanced';
 
 export { 
