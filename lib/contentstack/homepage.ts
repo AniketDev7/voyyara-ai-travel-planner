@@ -1,5 +1,6 @@
 /**
  * Contentstack SDK functions for Homepage Content
+ * Using TypeScript Delivery SDK
  */
 
 import { Stack } from './client';
@@ -85,13 +86,13 @@ export interface HomepageContent {
  */
 export async function getHomepageContent(): Promise<HomepageContent | null> {
   try {
-    const response = await Stack.ContentType('homepage_content')
-      .Query()
-      .toJSON()
-      .find();
+    const result = await Stack.contentType('homepage_content')
+      .entry()
+      .query()
+      .find<HomepageContent>();
     
-    if (response[0] && response[0].length > 0) {
-      return response[0][0] as HomepageContent;
+    if (result.entries && result.entries.length > 0) {
+      return result.entries[0];
     }
     
     return null;
@@ -100,4 +101,3 @@ export async function getHomepageContent(): Promise<HomepageContent | null> {
     return null;
   }
 }
-

@@ -1,6 +1,7 @@
 /**
  * Contentstack - About Page Integration
  * Fetches About page content from CMS
+ * Using TypeScript Delivery SDK
  */
 
 import { Stack } from '@/lib/contentstack/client';
@@ -17,13 +18,13 @@ interface AboutPageData {
 
 export async function getAboutPageContent(): Promise<AboutPageData | null> {
   try {
-    const response = await Stack.ContentType('about_page_content')
-      .Query()
-      .toJSON()
-      .find();
+    const result = await Stack.contentType('about_page_content')
+      .entry()
+      .query()
+      .find<AboutPageData>();
 
-    if (response && response[0] && response[0].length > 0) {
-      return response[0][0] as unknown as AboutPageData;
+    if (result.entries && result.entries.length > 0) {
+      return result.entries[0];
     }
 
     return null;
@@ -32,4 +33,3 @@ export async function getAboutPageContent(): Promise<AboutPageData | null> {
     return null;
   }
 }
-

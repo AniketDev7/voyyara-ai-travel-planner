@@ -1,6 +1,7 @@
 /**
  * Contentstack - Contact Page Integration
  * Fetches Contact page content from CMS
+ * Using TypeScript Delivery SDK
  */
 
 import { Stack } from '@/lib/contentstack/client';
@@ -16,13 +17,13 @@ interface ContactPageData {
 
 export async function getContactPageContent(): Promise<ContactPageData | null> {
   try {
-    const response = await Stack.ContentType('contact_page_content')
-      .Query()
-      .toJSON()
-      .find();
+    const result = await Stack.contentType('contact_page_content')
+      .entry()
+      .query()
+      .find<ContactPageData>();
 
-    if (response && response[0] && response[0].length > 0) {
-      return response[0][0] as unknown as ContactPageData;
+    if (result.entries && result.entries.length > 0) {
+      return result.entries[0];
     }
 
     return null;
@@ -31,4 +32,3 @@ export async function getContactPageContent(): Promise<ContactPageData | null> {
     return null;
   }
 }
-

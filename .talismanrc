@@ -1,6 +1,6 @@
 fileignoreconfig:
 - filename: package-lock.json
-  checksum: dcd0c57b4cc157b3b72e567de9c2fa04cf987cb929571a82330e7750e81fe0b0
+  checksum: 26f33c7dca32cc84a8c470fa27eea429e6d6d0d495e143bfa7db97725e60a904
 - filename: components/shared/PersonalizedBadge.tsx
   checksum:
   ignore_detectors: []

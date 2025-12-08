@@ -1,5 +1,6 @@
 /**
  * Contentstack SDK functions for Site Settings
+ * Using TypeScript Delivery SDK
  */
 
 import { Stack } from './client';
@@ -57,13 +58,13 @@ export interface SiteSettings {
  */
 export async function getSiteSettings(): Promise<SiteSettings | null> {
   try {
-    const response = await Stack.ContentType('site_settings')
-      .Query()
-      .toJSON()
-      .find();
+    const result = await Stack.contentType('site_settings')
+      .entry()
+      .query()
+      .find<SiteSettings>();
     
-    if (response[0] && response[0].length > 0) {
-      return response[0][0] as SiteSettings;
+    if (result.entries && result.entries.length > 0) {
+      return result.entries[0];
     }
     
     return null;
@@ -72,4 +73,3 @@ export async function getSiteSettings(): Promise<SiteSettings | null> {
     return null;
   }
 }
-

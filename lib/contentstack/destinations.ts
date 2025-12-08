@@ -1,24 +1,28 @@
 /**
  * Contentstack queries for Destinations
+ * Using TypeScript Delivery SDK
  */
 
-import { Stack } from './client';
+import { Stack, QueryOperation } from './client';
 import type { Destination } from './types';
+
+// Response type from the SDK
+interface FindResponse<T> {
+  entries: T[];
+  count?: number;
+}
 
 // Get all destinations
 export async function getAllDestinations(limit: number = 50): Promise<Destination[]> {
   try {
-    const query = Stack.ContentType('destination')
-      .Query()
+    const result = await Stack.contentType('destination')
+      .entry()
+      .includeReference('attractions', 'hotels', 'restaurants', 'activities')
+      .query()
       .limit(limit)
-      .includeReference('attractions')
-      .includeReference('hotels')
-      .includeReference('restaurants')
-      .includeReference('activities')
-      .toJSON();
+      .find<Destination>();
 
-    const result = await query.find();
-    return result[0] as Destination[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching destinations:', error);
     throw error;
@@ -28,17 +32,14 @@ export async function getAllDestinations(limit: number = 50): Promise<Destinatio
 // Get a single destination by slug
 export async function getDestinationBySlug(slug: string): Promise<Destination | null> {
   try {
-    const query = Stack.ContentType('destination')
-      .Query()
-      .where('slug', slug)
-      .includeReference('attractions')
-      .includeReference('hotels')
-      .includeReference('restaurants')
-      .includeReference('activities')
-      .toJSON();
+    const result = await Stack.contentType('destination')
+      .entry()
+      .includeReference('attractions', 'hotels', 'restaurants', 'activities')
+      .query()
+      .where('slug', QueryOperation.EQUALS, slug)
+      .find<Destination>();
 
-    const result = await query.find();
-    const entries = result[0] as Destination[];
+    const entries = result.entries || [];
     return entries.length > 0 ? entries[0] : null;
   } catch (error) {
     console.error('Error fetching destination by slug:', error);
@@ -49,16 +50,12 @@ export async function getDestinationBySlug(slug: string): Promise<Destination | 
 // Get a single destination by UID
 export async function getDestinationByUid(uid: string): Promise<Destination | null> {
   try {
-    const entry = await Stack.ContentType('destination')
-      .Entry(uid)
-      .includeReference('attractions')
-      .includeReference('hotels')
-      .includeReference('restaurants')
-      .includeReference('activities')
-      .toJSON()
-      .fetch();
+    const entry = await Stack.contentType('destination')
+      .entry(uid)
+      .includeReference('attractions', 'hotels', 'restaurants', 'activities')
+      .fetch<Destination>();
 
-    return entry as Destination;
+    return entry;
   } catch (error) {
     console.error('Error fetching destination by UID:', error);
     return null;
@@ -68,13 +65,13 @@ export async function getDestinationByUid(uid: string): Promise<Destination | nu
 // Get destinations by region
 export async function getDestinationsByRegion(region: string): Promise<Destination[]> {
   try {
-    const query = Stack.ContentType('destination')
-      .Query()
-      .where('region', region)
-      .toJSON();
+    const result = await Stack.contentType('destination')
+      .entry()
+      .query()
+      .where('region', QueryOperation.EQUALS, region)
+      .find<Destination>();
 
-    const result = await query.find();
-    return result[0] as Destination[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching destinations by region:', error);
     throw error;
@@ -84,13 +81,13 @@ export async function getDestinationsByRegion(region: string): Promise<Destinati
 // Search destinations (basic text search)
 export async function searchDestinations(searchTerm: string): Promise<Destination[]> {
   try {
-    const query = Stack.ContentType('destination')
-      .Query()
+    const result = await Stack.contentType('destination')
+      .entry()
+      .query()
       .regex('title', searchTerm, 'i') // Case-insensitive regex search
-      .toJSON();
+      .find<Destination>();
 
-    const result = await query.find();
-    return result[0] as Destination[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error searching destinations:', error);
     throw error;
@@ -100,16 +97,15 @@ export async function searchDestinations(searchTerm: string): Promise<Destinatio
 // Get featured destinations (for homepage)
 export async function getFeaturedDestinations(limit: number = 6): Promise<Destination[]> {
   try {
-    const query = Stack.ContentType('destination')
-      .Query()
+    const result = await Stack.contentType('destination')
+      .entry()
+      .query()
       .limit(limit)
-      .toJSON();
+      .find<Destination>();
 
-    const result = await query.find();
-    return result[0] as Destination[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching featured destinations:', error);
     throw error;
   }
 }
-

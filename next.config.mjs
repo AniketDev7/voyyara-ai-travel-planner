@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Return null to let Next.js auto-generate the build ID using nanoid
-  generateBuildId: async () => null,
+  // Generate a unique build ID based on timestamp
+  generateBuildId: async () => `build-${Date.now()}`,
   images: {
     remotePatterns: [
       {

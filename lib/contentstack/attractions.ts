@@ -1,21 +1,22 @@
 /**
  * Contentstack queries for Attractions
+ * Using TypeScript Delivery SDK
  */
 
-import { Stack } from './client';
+import { Stack, QueryOperation } from './client';
 import type { Attraction } from './types';
 
 // Get all attractions
 export async function getAllAttractions(limit: number = 100): Promise<Attraction[]> {
   try {
-    const query = Stack.ContentType('attraction')
-      .Query()
-      .limit(limit)
+    const result = await Stack.contentType('attraction')
+      .entry()
       .includeReference('destination')
-      .toJSON();
+      .query()
+      .limit(limit)
+      .find<Attraction>();
 
-    const result = await query.find();
-    return result[0] as Attraction[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching attractions:', error);
     throw error;
@@ -25,13 +26,13 @@ export async function getAllAttractions(limit: number = 100): Promise<Attraction
 // Get attractions by destination UID
 export async function getAttractionsByDestination(destinationUid: string): Promise<Attraction[]> {
   try {
-    const query = Stack.ContentType('attraction')
-      .Query()
-      .where('destination', destinationUid)
-      .toJSON();
+    const result = await Stack.contentType('attraction')
+      .entry()
+      .query()
+      .where('destination', QueryOperation.EQUALS, destinationUid)
+      .find<Attraction>();
 
-    const result = await query.find();
-    return result[0] as Attraction[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching attractions by destination:', error);
     throw error;
@@ -41,13 +42,12 @@ export async function getAttractionsByDestination(destinationUid: string): Promi
 // Get a single attraction by UID
 export async function getAttractionByUid(uid: string): Promise<Attraction | null> {
   try {
-    const entry = await Stack.ContentType('attraction')
-      .Entry(uid)
+    const entry = await Stack.contentType('attraction')
+      .entry(uid)
       .includeReference('destination')
-      .toJSON()
-      .fetch();
+      .fetch<Attraction>();
 
-    return entry as Attraction;
+    return entry;
   } catch (error) {
     console.error('Error fetching attraction by UID:', error);
     return null;
@@ -57,16 +57,15 @@ export async function getAttractionByUid(uid: string): Promise<Attraction | null
 // Get attractions by category
 export async function getAttractionsByCategory(category: string): Promise<Attraction[]> {
   try {
-    const query = Stack.ContentType('attraction')
-      .Query()
-      .where('category', category)
-      .toJSON();
+    const result = await Stack.contentType('attraction')
+      .entry()
+      .query()
+      .where('category', QueryOperation.EQUALS, category)
+      .find<Attraction>();
 
-    const result = await query.find();
-    return result[0] as Attraction[];
+    return result.entries || [];
   } catch (error) {
     console.error('Error fetching attractions by category:', error);
     throw error;
   }
 }
-
