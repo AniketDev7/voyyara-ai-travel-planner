@@ -1,31 +1,30 @@
 fileignoreconfig:
-  - filename: package-lock.json
-    checksum: 9f9bedbc24ed77b063eafef52c5fcdb9bc1d9715bdf76e91a9afd23b805f6927
-  - filename: components/shared/PersonalizedBadge.tsx
-    checksum: 
-    ignore_detectors: []
-    allowed_patterns:
-      - key={
-  - filename: components/shared/Footer.tsx
-    checksum:
-    ignore_detectors: []
-    allowed_patterns:
-      - key={
-  - filename: components/quiz/QuizModal.tsx
-    checksum:
-    ignore_detectors: []
-    allowed_patterns:
-      - key=
-      - keydown
-      - handleEscape
-  - filename: lib/utils/render-json-rte.tsx
-    checksum:
-    ignore_detectors: []
-    allowed_patterns:
-      - key={
-  - filename: lib/contentstack/sample-data/japan-cultural-rich.json
-    checksum:
-    ignore_detectors: []
-    allowed_patterns: []
+- filename: package-lock.json
+  checksum: dcd0c57b4cc157b3b72e567de9c2fa04cf987cb929571a82330e7750e81fe0b0
+- filename: components/shared/PersonalizedBadge.tsx
+  checksum:
+  ignore_detectors: []
+  allowed_patterns:
+  - key={
+- filename: components/shared/Footer.tsx
+  checksum:
+  ignore_detectors: []
+  allowed_patterns:
+  - key={
+- filename: components/quiz/QuizModal.tsx
+  checksum:
+  ignore_detectors: []
+  allowed_patterns:
+  - key=
+  - keydown
+  - handleEscape
+- filename: lib/utils/render-json-rte.tsx
+  checksum:
+  ignore_detectors: []
+  allowed_patterns:
+  - key={
+- filename: lib/contentstack/sample-data/japan-cultural-rich.json
+  checksum:
+  ignore_detectors: []
+  allowed_patterns: []
 threshold: medium
-
