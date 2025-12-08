@@ -5,8 +5,8 @@
 
 import { SYSTEM_PROMPT } from '@/lib/ai/prompts';
 
-// Use Node.js runtime for SSE parsing
-export const runtime = 'nodejs';
+// Use Edge runtime
+export const runtime = 'edge';
 
 // Environment variables
 const GENERATIVE_AI_BASE_URL = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION === 'eu'
@@ -36,10 +36,68 @@ function buildPromptWithHistory(messages: Message[]): string {
     }
   }
   
-  // Ask for the next response
-  prompt += "\nProvide your next response as the Voyyara travel assistant. Be helpful, friendly, and enthusiastic about travel. Keep your response concise and engaging.";
+  // Determine conversation phase based on message count
+  const messageCount = messages.length;
+  const hasItinerary = messages.some(m => 
+    m.role === 'assistant' && 
+    (m.content.includes('Day 1:') || m.content.includes('**Day 1'))
+  );
+  
+  prompt += `\nProvide your next response as the Voyyara travel assistant.
+
+CONVERSATION PHASE DETECTION:
+- Message count: ${messageCount}
+- Itinerary already generated: ${hasItinerary}
+
+RULES BASED ON PHASE:
+${messageCount <= 2 && !hasItinerary ? `
+PHASE 1: Ask 2-3 quick preference questions (travel style, companions, interests) in one short message.
+Don't generate itinerary yet - just ask the questions concisely.` : ''}
+
+${messageCount > 2 && !hasItinerary ? `
+PHASE 2: User has answered questions. Generate the full day-by-day itinerary NOW.
+Use the format with emojis (🌅 Morning, 🌞 Afternoon, 🌙 Evening, 🍽️ Try).` : ''}
+
+${hasItinerary ? `
+PHASE 3: Itinerary exists. Help user modify or enhance it.
+Suggest specific changes based on what they ask.` : ''}
+
+IMPORTANT: At the very end, add 3 contextual suggestions:
+[SUGGESTIONS]
+${!hasItinerary && messageCount <= 2 ? `- Luxury experience?
+- Budget-friendly option?
+- Generate my itinerary!` : ''}
+${!hasItinerary && messageCount > 2 ? `- Add a day trip nearby?
+- Include local food tour?
+- Regenerate with different pace?` : ''}
+${hasItinerary ? `- Swap Day X for something else?
+- Add more rest time?
+- Regenerate entire itinerary?` : ''}
+[/SUGGESTIONS]
+
+Keep suggestions SHORT and actionable!`;
   
   return prompt;
+}
+
+/**
+ * Parse suggestions from AI response
+ */
+function parseResponseAndSuggestions(text: string): { content: string; suggestions: string[] } {
+  const suggestionsMatch = text.match(/\[SUGGESTIONS\]([\s\S]*?)\[\/SUGGESTIONS\]/);
+  
+  if (suggestionsMatch) {
+    const content = text.replace(/\[SUGGESTIONS\][\s\S]*?\[\/SUGGESTIONS\]/, '').trim();
+    const suggestionsText = suggestionsMatch[1];
+    const suggestions = suggestionsText
+      .split('\n')
+      .map(s => s.replace(/^[-•]\s*/, '').trim())
+      .filter(s => s.length > 0 && s.endsWith('?'));
+    
+    return { content, suggestions: suggestions.slice(0, 3) };
+  }
+  
+  return { content: text, suggestions: [] };
 }
 
 export async function POST(req: Request) {
@@ -84,66 +142,36 @@ export async function POST(req: Request) {
       return new Response('AI service error', { status: 500 });
     }
     
-    // Create a TransformStream to convert SSE to text stream
-    const encoder = new TextEncoder();
+    // Parse SSE response and collect all content
+    const responseText = await response.text();
+    const lines = responseText.split('\n');
+    let fullContent = '';
     
-    const stream = new ReadableStream({
-      async start(controller) {
-        const reader = response.body?.getReader();
-        if (!reader) {
-          controller.close();
-          return;
-        }
-        
-        const decoder = new TextDecoder();
-        let buffer = '';
-        
+    for (const line of lines) {
+      if (line.startsWith('data: ')) {
         try {
-          while (true) {
-            const { done, value } = await reader.read();
-            
-            if (done) {
-              controller.close();
-              break;
-            }
-            
-            buffer += decoder.decode(value, { stream: true });
-            
-            // Process complete lines
-            const lines = buffer.split('\n');
-            buffer = lines.pop() || ''; // Keep incomplete line in buffer
-            
-            for (const line of lines) {
-              if (line.startsWith('data: ')) {
-                try {
-                  const jsonStr = line.substring(6).trim();
-                  if (jsonStr) {
-                    const chunk = JSON.parse(jsonStr);
-                    if (chunk.content) {
-                      // Send the content chunk
-                      controller.enqueue(encoder.encode(chunk.content));
-                    }
-                  }
-                } catch {
-                  // Skip invalid JSON
-                }
-              }
+          const jsonStr = line.substring(6).trim();
+          if (jsonStr) {
+            const chunk = JSON.parse(jsonStr);
+            if (chunk.content) {
+              fullContent += chunk.content;
             }
           }
-        } catch (error) {
-          console.error('[Chat] Stream error:', error);
-          controller.error(error);
+        } catch {
+          // Skip invalid JSON
         }
-      },
-    });
+      }
+    }
     
-    // Return streaming response
-    return new Response(stream, {
-      headers: {
-        'Content-Type': 'text/plain; charset=utf-8',
-        'Cache-Control': 'no-cache',
-        'Connection': 'keep-alive',
-      },
+    // Parse content and suggestions
+    const { content, suggestions } = parseResponseAndSuggestions(fullContent);
+    
+    console.log('[Chat] Response:', content.substring(0, 100) + '...');
+    console.log('[Chat] Suggestions:', suggestions);
+    
+    // Return JSON response with content and suggestions
+    return new Response(JSON.stringify({ content, suggestions }), {
+      headers: { 'Content-Type': 'application/json' },
     });
     
   } catch (error) {

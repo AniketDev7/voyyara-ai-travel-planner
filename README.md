@@ -1,16 +1,27 @@
 # ✈️ Voyyara - AI Travel Planner
 
-> Your AI-powered travel companion. Plan perfect trips with personalized itineraries in seconds, powered by Next.js 15, React 19, OpenAI GPT-4, and Contentstack CMS.
+> Your AI-powered travel companion. Plan perfect trips with personalized itineraries in seconds, powered by Next.js 15, React 19, and the full Contentstack DXP suite.
 
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)](https://www.typescriptlang.org/)
-[![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4-green)](https://openai.com/)
-[![Contentstack](https://img.shields.io/badge/Contentstack-CMS-purple)](https://www.contentstack.com/)
+[![Contentstack](https://img.shields.io/badge/Contentstack-DXP-purple)](https://www.contentstack.com/)
+[![Launch](https://img.shields.io/badge/Contentstack-Launch-blue)](https://www.contentstack.com/products/launch)
+
+## 🏗️ Contentstack Products Integrated
+
+| Product | Usage | Impact |
+|---------|-------|--------|
+| **Headless CMS** | Stores destinations, itineraries, attractions, and site content | Central content repository for all travel data |
+| **Launch** | Hosts and deploys the Next.js application | Production-ready hosting with automatic deployments |
+| **Automate** | Triggers email notifications on contact form submissions | Automated workflow for customer enquiries |
+| **Generative AI API** | Powers the AI travel planner with Brand Kit voice profile | On-brand AI responses using Voyyara voice |
+| **Brand Kit** | Defines voice profile for consistent AI-generated content | Ensures all AI content matches brand tone |
+| **Personalize** | Enables entry variants for different travel styles | Luxury/Budget variants of itineraries |
 
 ## ✨ Features
 
-- **Voyyara Genie** - Your AI travel assistant powered by OpenAI GPT-4
+- **Voyyara Genie** - AI travel assistant (supports OpenAI GPT-4 or Contentstack Gen AI)
 - **Natural Conversations** - Chat naturally to plan your dream trip
 - **Smart Recommendations** - Discover hidden gems and popular attractions
 - **Detailed Itineraries** - Day-by-day plans with timing and activities
@@ -19,6 +30,7 @@
 - **Fully Responsive** - Perfect experience on any device
 - **Multiple Destinations** - Vietnam, Japan, Thailand, South Korea, Singapore & more
 - **CMS Integration** - Content managed through Contentstack
+- **Email Notifications** - Automated enquiry notifications via Contentstack Automate
 - ✈️ **Predefined Itineraries** - Ready-made travel plans with detailed day-by-day schedules
 
 ## Quick Start
@@ -113,11 +125,14 @@
 
 ### Backend & APIs
 - **Next.js API Routes** - Backend endpoints
-- **OpenAI GPT-4** - AI itinerary generation
+- **OpenAI GPT-4** - AI itinerary generation (switchable)
+- **Contentstack Generative AI** - On-brand AI responses with Voice Profile
 - **Vercel AI SDK** - Streaming responses
 - **Contentstack CMS** - Content management
   - Content Delivery API (CDA) - Read content
   - Content Management API (CMA) - Write content
+  - Generative AI API - AI content generation
+  - Automate Webhooks - Workflow automation
 
 ### State & Forms
 - **Zustand** - State management
