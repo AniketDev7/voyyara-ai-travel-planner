@@ -1,4 +1,9 @@
-import { Stack } from './client';
+/**
+ * Contentstack queries for Itineraries
+ * Using TypeScript Delivery SDK
+ */
+
+import { Stack, QueryOperation } from './client';
 import { getVariantForPreferences } from '../personalize/edge-api';
 
 // V1 Itinerary Template (basic structure)
@@ -210,19 +215,18 @@ export async function getItineraryBySlugWithVariant(
       }
     }
     
-    // Fetch base entry
+    // Fetch base entry using TypeScript SDK
     try {
-      const query = Stack.ContentType(contentType)
-        .Query()
-        .where('slug', slug)
+      const result = await Stack.contentType(contentType)
+        .entry()
         .includeReference('destination')
-        .toJSON();
+        .query()
+        .where('slug', QueryOperation.EQUALS, slug)
+        .find<ItineraryTemplateV2>();
       
-      const result = await query.find();
-      
-      if (result[0] && result[0].length > 0) {
+      if (result.entries && result.entries.length > 0) {
         console.log(`✅ Found ${contentType} entry for slug: ${slug}`);
-        return normalizeItinerary(result[0][0] as ItineraryTemplateV2);
+        return normalizeItinerary(result.entries[0] as any);
       }
     } catch (err) {
       console.error(`Error fetching ${contentType}:`, err);
@@ -409,6 +413,7 @@ function extractTextFromJsonRte(content: any): string {
 /**
  * Fetch itinerary variant using REST API with variant header
  * Supports both V1 (itinerary_template) and V2 (itinerary_template_v2) content types
+ * NOTE: This uses direct REST API calls because the SDK doesn't support variant headers yet
  */
 async function fetchItineraryVariant(
   slug: string, 
@@ -466,13 +471,13 @@ export async function getItinerariesByDestination(destinationTitle: string): Pro
   try {
     const contentType = 'itinerary_template_v2';
     
-    const query = Stack.ContentType(contentType)
-      .Query()
+    const result = await Stack.contentType(contentType)
+      .entry()
       .includeReference('destination')
-      .toJSON();
+      .query()
+      .find<ItineraryTemplateV2>();
     
-    const result = await query.find();
-    const entries = result[0] || [];
+    const entries = result.entries || [];
     
     const filtered = entries.filter((itin: any) => {
       const destTitle = itin.destination?.[0]?.title || itin.destination?.title;
@@ -495,17 +500,16 @@ export async function getItineraryBySlug(slug: string): Promise<ItineraryTemplat
   try {
     const contentType = 'itinerary_template_v2';
     
-    const query = Stack.ContentType(contentType)
-      .Query()
-      .where('slug', slug)
+    const result = await Stack.contentType(contentType)
+      .entry()
       .includeReference('destination')
-      .toJSON();
+      .query()
+      .where('slug', QueryOperation.EQUALS, slug)
+      .find<ItineraryTemplateV2>();
     
-    const result = await query.find();
-    
-    if (result[0] && result[0].length > 0) {
+    if (result.entries && result.entries.length > 0) {
       console.log(`Found ${contentType} entry for slug: ${slug}`);
-      return normalizeItinerary(result[0][0]);
+      return normalizeItinerary(result.entries[0] as any);
     }
     
     return null;
@@ -522,13 +526,13 @@ export async function getAllItineraries(): Promise<ItineraryTemplateV2[]> {
   try {
     const contentType = 'itinerary_template_v2';
     
-    const query = Stack.ContentType(contentType)
-      .Query()
+    const result = await Stack.contentType(contentType)
+      .entry()
       .includeReference('destination')
-      .toJSON();
+      .query()
+      .find<ItineraryTemplateV2>();
     
-    const result = await query.find();
-    const entries = (result[0] || []).map((entry: any) => normalizeItinerary(entry));
+    const entries = (result.entries || []).map((entry: any) => normalizeItinerary(entry));
     
     return entries;
   } catch (error: any) {
@@ -676,6 +680,7 @@ export async function getItineraryWithPersonalization(
 /**
  * Fetch itinerary entry with specific variant UID
  * Uses itinerary_template_v2 content type only
+ * NOTE: This uses direct REST API calls because the SDK doesn't support variant headers yet
  */
 async function fetchItineraryWithVariant(slug: string, variantUid: string): Promise<ItineraryTemplateV2 | null> {
   const API_KEY = process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY;

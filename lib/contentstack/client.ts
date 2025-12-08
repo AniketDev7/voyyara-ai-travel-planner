@@ -1,20 +1,39 @@
 /**
  * Contentstack Client Setup
- * Initializes Content Delivery API (CDA) and Content Management API (CMA) clients
+ * Initializes Content Delivery API (CDA) using TypeScript SDK
+ * and Content Management API (CMA) clients
  * With Personalize/Entry Variants support
  */
 
-import Contentstack from 'contentstack';
+import contentstack, { Region, QueryOperation } from '@contentstack/delivery-sdk';
 import * as contentstackManagement from '@contentstack/management';
 
+// Map string region to Region enum
+const getRegionEnum = (region: string): Region => {
+  const regionMap: Record<string, Region> = {
+    'us': Region.US,
+    'eu': Region.EU,
+    'au': Region.AU,
+    'azure-na': Region.AZURE_NA,
+    'azure-eu': Region.AZURE_EU,
+    'gcp-na': Region.GCP_NA,
+    'gcp-eu': Region.GCP_EU,
+  };
+  return regionMap[region.toLowerCase()] || Region.US;
+};
+
 // Content Delivery API (CDA) - For reading published content
-const region = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION || 'us';
-export const Stack = Contentstack.Stack({
-  api_key: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY!,
-  delivery_token: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN!,
+// Using the new TypeScript SDK
+const regionString = process.env.NEXT_PUBLIC_CONTENTSTACK_REGION || 'us';
+export const Stack = contentstack.stack({
+  apiKey: process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY!,
+  deliveryToken: process.env.NEXT_PUBLIC_CONTENTSTACK_DELIVERY_TOKEN!,
   environment: process.env.NEXT_PUBLIC_CONTENTSTACK_ENV || 'production',
-  region: region as any, // Type assertion for Contentstack SDK region
+  region: getRegionEnum(regionString),
 });
+
+// Re-export QueryOperation for use in other files
+export { QueryOperation, Region };
 
 // Content Management API (CMA) - For creating/updating content
 export const getManagementClient = () => {
@@ -57,7 +76,7 @@ export const validateContentstackConfig = () => {
 
 // Log configuration (only in development)
 if (process.env.NODE_ENV === 'development') {
-  console.log('  Contentstack Configuration:');
+  console.log('  Contentstack Configuration (TypeScript SDK):');
   console.log('   Region:', process.env.NEXT_PUBLIC_CONTENTSTACK_REGION);
   console.log('   Environment:', process.env.NEXT_PUBLIC_CONTENTSTACK_ENV);
   console.log('   API Key:', process.env.NEXT_PUBLIC_CONTENTSTACK_API_KEY ? 'Set' : 'Missing');
