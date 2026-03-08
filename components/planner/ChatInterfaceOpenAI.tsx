@@ -8,17 +8,56 @@
 import { useChat } from 'ai/react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const MAX_FREE_MESSAGES = 5;
+const STORAGE_KEY = 'voyyara_message_count';
+
+function getMessageCount(): number {
+  if (typeof window === 'undefined') return 0;
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? parseInt(stored, 10) : 0;
+}
+
+function incrementMessageCount(): number {
+  const current = getMessageCount();
+  const newCount = current + 1;
+  localStorage.setItem(STORAGE_KEY, newCount.toString());
+  return newCount;
+}
+
 export function ChatInterfaceOpenAI() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, input, handleInputChange, handleSubmit: originalHandleSubmit, isLoading } = useChat({
     api: '/api/chat-openai',
   });
+
+  const [messageCount, setMessageCount] = useState(0);
+  const [showUpgradeModal, setShowUpgradeModal] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setMessageCount(getMessageCount());
+  }, []);
+
+  const handleSubmit = useCallback((e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (messageCount >= MAX_FREE_MESSAGES) {
+      setShowUpgradeModal(true);
+      return;
+    }
+
+    const newCount = incrementMessageCount();
+    setMessageCount(newCount);
+    originalHandleSubmit(e);
+  }, [messageCount, originalHandleSubmit]);
+
+  const remainingMessages = MAX_FREE_MESSAGES - messageCount;
+  const isLimitReached = messageCount >= MAX_FREE_MESSAGES;
 
   const scrollToBottom = () => {
     if (messagesContainerRef.current) {
@@ -35,11 +74,65 @@ export function ChatInterfaceOpenAI() {
   }, [messages, isLoading]);
 
   return (
+    <>
+    {/* Upgrade Modal */}
+    <AnimatePresence>
+      {showUpgradeModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowUpgradeModal(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center">
+              <div className="text-6xl mb-4">🚀</div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                You&apos;ve Used All Free Messages!
+              </h3>
+              <p className="text-gray-600 mb-6">
+                You&apos;ve enjoyed {MAX_FREE_MESSAGES} free conversations with Voyyara Genie. 
+                Upgrade to our Starter Plan to continue planning your dream trips!
+              </p>
+              <div className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-2xl p-4 mb-6">
+                <p className="text-sm text-gray-700 font-medium mb-2">Starter Plan includes:</p>
+                <ul className="text-sm text-gray-600 space-y-1">
+                  <li>✓ Unlimited AI conversations</li>
+                  <li>✓ Save & export itineraries</li>
+                  <li>✓ Priority support</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-3">
+                <Button
+                  className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-3 rounded-xl"
+                  onClick={() => window.open('mailto:contact@voyyara.com?subject=Voyyara Starter Plan Inquiry', '_blank')}
+                >
+                  Get Starter Plan
+                </Button>
+                <button
+                  className="text-sm text-gray-500 hover:text-gray-700"
+                  onClick={() => setShowUpgradeModal(false)}
+                >
+                  Maybe later
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      // changed height to 750px
       className="flex flex-col h-[750px] bg-white rounded-3xl shadow-2xl border border-gray-200 overflow-hidden"
     >
       {/* Header */}
@@ -143,35 +236,54 @@ export function ChatInterfaceOpenAI() {
 
       {/* Input */}
       <div className="border-t border-gray-200 p-5 bg-white">
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit(e);
-          setTimeout(() => inputRef.current?.blur(), 100);
-        }} className="flex space-x-3 mb-2">
-          <Input
-            ref={inputRef}
-            value={input}
-            onChange={handleInputChange}
-            placeholder="Tell me about your dream trip..."
-            disabled={isLoading}
-            autoFocus={false}
-            autoComplete="off"
-            className="flex-1 bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:bg-white focus:border-purple-400 transition-all rounded-2xl h-12 px-5 text-base"
-          />
-          <Button 
-            type="submit" 
-            disabled={isLoading || !input.trim()}
-            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-0 shadow-lg rounded-2xl px-8 h-12 font-semibold"
-          >
-            {isLoading ? '✨ Sending...' : 'Send'}
-          </Button>
-        </form>
-        <p className="text-xs text-gray-400 text-center flex items-center justify-center gap-1">
-          <span className="text-gray-300">ⓘ</span>
-          Voyyara Genie can make mistakes. Check important info.
-        </p>
+        {isLimitReached ? (
+          <div className="text-center py-2">
+            <p className="text-gray-600 mb-3">You&apos;ve used all {MAX_FREE_MESSAGES} free messages</p>
+            <Button
+              onClick={() => setShowUpgradeModal(true)}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold py-2 px-6 rounded-xl"
+            >
+              🚀 Upgrade to Continue
+            </Button>
+          </div>
+        ) : (
+          <>
+            <form onSubmit={(e) => {
+              handleSubmit(e);
+              setTimeout(() => inputRef.current?.blur(), 100);
+            }} className="flex space-x-3 mb-2">
+              <Input
+                ref={inputRef}
+                value={input}
+                onChange={handleInputChange}
+                placeholder="Tell me about your dream trip..."
+                disabled={isLoading}
+                autoFocus={false}
+                autoComplete="off"
+                className="flex-1 bg-gray-50 border-gray-200 text-gray-900 placeholder:text-gray-500 focus:bg-white focus:border-purple-400 transition-all rounded-2xl h-12 px-5 text-base"
+              />
+              <Button 
+                type="submit" 
+                disabled={isLoading || !input.trim()}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 border-0 shadow-lg rounded-2xl px-8 h-12 font-semibold"
+              >
+                {isLoading ? '✨ Sending...' : 'Send'}
+              </Button>
+            </form>
+            <div className="flex items-center justify-between text-xs text-gray-400">
+              <p className="flex items-center gap-1">
+                <span className="text-gray-300">ⓘ</span>
+                Voyyara Genie can make mistakes. Check important info.
+              </p>
+              <p className={`font-medium ${remainingMessages <= 2 ? 'text-orange-500' : 'text-gray-500'}`}>
+                {remainingMessages} message{remainingMessages !== 1 ? 's' : ''} remaining
+              </p>
+            </div>
+          </>
+        )}
       </div>
     </motion.div>
+    </>
   );
 }
 
